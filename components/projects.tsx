@@ -32,14 +32,16 @@ export default function Projects() {
       link: "https://github.com/Ang3lRamos/data-cleaning-project.git",
     },
     {
-      title: "API con Node.js",
-      description: "Estructura CRUD conectada a base de datos, manejo de autenticación y autorización.",
-      tags: ["Node.js", "JavaScript", "REST API"],
-    },
-    {
       title: "Modelo ML Básico",
       description: "Predicción simple usando scikit-learn, entrenamiento y evaluación de modelos.",
       tags: ["Python", "Machine Learning", "scikit-learn"],
+      link: "https://colab.research.google.com/drive/1icWFIpgn5dAl5sfqFTPXwcHnBKyKS8j0?usp=sharing",
+    },
+    {
+      title: "Landing Page Aqua Bear",
+      description: "Sistema de reservas integral con autenticación de usuarios y panel de administración para gestionar las reservas de clases. Control de acceso basado en roles (RBAC) que separa las funciones de cliente y administrador.",
+      tags: ["React", "Next.Js", "Supabase", "PostgreSql","TypeScript", "Tailwind CSS"],
+      link: "https://aqua-bear.vercel.app",
     },
   ]
 

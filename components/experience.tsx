@@ -17,24 +17,24 @@ export default function Experience() {
                   <h3 className="text-xl sm:text-2xl font-semibold text-foreground">Analista de Operaciones</h3>
                   <p className="text-accent text-sm sm:text-base font-medium">Inversiones Manpe</p>
                 </div>
-                <span className="text-accent text-xs sm:text-base font-medium">Oct 2025 - Presente</span>
+                <span className="text-accent text-xs sm:text-base font-medium">Oct 2025 - Dic 2025</span>
               </div>
 
               <ul className="space-y-2 sm:space-y-3 text-muted-foreground">
                 <li className="flex items-start gap-2 sm:gap-3 text-sm sm:text-base">
-                  <span className="text-accent mt-1 flex-shrink-0">•</span>
+                  <span className="text-accent mt-1 shrink-0">•</span>
                   <span>Gestión y análisis de inventarios para mejorar la eficiencia operativa</span>
                 </li>
                 <li className="flex items-start gap-2 sm:gap-3 text-sm sm:text-base">
-                  <span className="text-accent mt-1 flex-shrink-0">•</span>
+                  <span className="text-accent mt-1 shrink-0">•</span>
                   <span>Automatización de controles y procesos utilizando herramientas basadas en datos</span>
                 </li>
                 <li className="flex items-start gap-2 sm:gap-3 text-sm sm:text-base">
-                  <span className="text-accent mt-1 flex-shrink-0">•</span>
+                  <span className="text-accent mt-1 shrink-0">•</span>
                   <span>Creación de reportes y dashboards para monitoreo de KPIs operativos</span>
                 </li>
                 <li className="flex items-start gap-2 sm:gap-3 text-sm sm:text-base">
-                  <span className="text-accent mt-1 flex-shrink-0">•</span>
+                  <span className="text-accent mt-1 shrink-0">•</span>
                   <span>Liderazgo de equipos para optimizar procesos y reducir tiempos de operación</span>
                 </li>
               </ul>
@@ -56,30 +56,30 @@ export default function Experience() {
 
               <ul className="space-y-2 sm:space-y-3 text-muted-foreground">
                 <li className="flex items-start gap-2 sm:gap-3 text-sm sm:text-base">
-                  <span className="text-accent mt-1 flex-shrink-0">•</span>
+                  <span className="text-accent mt-1 shrink-0">•</span>
                   <span>
                     Desarrollo de dashboards interactivos en Power BI para visualización de KPIs corporativos y toma de
                     decisiones
                   </span>
                 </li>
                 <li className="flex items-start gap-2 sm:gap-3 text-sm sm:text-base">
-                  <span className="text-accent mt-1 flex-shrink-0">•</span>
+                  <span className="text-accent mt-1 shrink-0">•</span>
                   <span>
                     Automatización de procesos de extracción y transformación de datos mediante Python (Pandas) y SQL
                   </span>
                 </li>
                 <li className="flex items-start gap-2 sm:gap-3 text-sm sm:text-base">
-                  <span className="text-accent mt-1 flex-shrink-0">•</span>
+                  <span className="text-accent mt-1 shrink-0">•</span>
                   <span>
                     Optimización de consultas SQL complejas para mejorar el rendimiento de reportes analíticos
                   </span>
                 </li>
                 <li className="flex items-start gap-2 sm:gap-3 text-sm sm:text-base">
-                  <span className="text-accent mt-1 flex-shrink-0">•</span>
+                  <span className="text-accent mt-1 shrink-0">•</span>
                   <span>Implementación de soluciones de análisis de datos en Azure, integrando pipelines ETL</span>
                 </li>
                 <li className="flex items-start gap-2 sm:gap-3 text-sm sm:text-base">
-                  <span className="text-accent mt-1 flex-shrink-0">•</span>
+                  <span className="text-accent mt-1 shrink-0">•</span>
                   <span>
                     Colaboración en equipos ágiles (Scrum) para entrega iterativa de soluciones de Business Intelligence
                   </span>
@@ -108,25 +108,25 @@ export default function Experience() {
 
               <ul className="space-y-2 sm:space-y-3 text-muted-foreground">
                 <li className="flex items-start gap-2 sm:gap-3 text-sm sm:text-base">
-                  <span className="text-accent mt-1 flex-shrink-0">•</span>
+                  <span className="text-accent mt-1 shrink-0">•</span>
                   <span>
                     Desarrollé dashboards interactivos en Power BI/Excel para visualización de KPIs y métricas clave
                   </span>
                 </li>
                 <li className="flex items-start gap-2 sm:gap-3 text-sm sm:text-base">
-                  <span className="text-accent mt-1 flex-shrink-0">•</span>
+                  <span className="text-accent mt-1 shrink-0">•</span>
                   <span>Realicé análisis exploratorio y limpieza de datos utilizando Python, R y SQL</span>
                 </li>
                 <li className="flex items-start gap-2 sm:gap-3 text-sm sm:text-base">
-                  <span className="text-accent mt-1 flex-shrink-0">•</span>
+                  <span className="text-accent mt-1 shrink-0">•</span>
                   <span>Generé reportes automatizados que redujeron el tiempo de análisis manual</span>
                 </li>
                 <li className="flex items-start gap-2 sm:gap-3 text-sm sm:text-base">
-                  <span className="text-accent mt-1 flex-shrink-0">•</span>
+                  <span className="text-accent mt-1 shrink-0">•</span>
                   <span>Trabajé con conjuntos de datos de industrias: retail, finanzas y salud</span>
                 </li>
                 <li className="flex items-start gap-2 sm:gap-3 text-sm sm:text-base">
-                  <span className="text-accent mt-1 flex-shrink-0">•</span>
+                  <span className="text-accent mt-1 shrink-0">•</span>
                   <span>Implementé modelos predictivos estadísticos para pronósticos y optimización</span>
                 </li>
               </ul>

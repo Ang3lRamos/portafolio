@@ -27,7 +27,7 @@ export default function Hero() {
                 asChild
               >
                 <a
-                  href="https://drive.google.com/file/d/1SrA9dKwFcGY3rRd6W01WL3WKnLsnbN3J/view?usp=sharing"
+                  href="https://drive.google.com/file/d/1iXlMbIL19fVKFhGpvsRmYg-JHa5s-Cri/view?usp=sharing"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2"
