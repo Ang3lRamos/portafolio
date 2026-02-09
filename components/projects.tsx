@@ -64,7 +64,7 @@ export default function Projects() {
                   {project.title}
                 </h3>
                 <ArrowUpRight
-                  className="text-accent opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0"
+                  className="text-accent opacity-0 group-hover:opacity-100 transition-opacity shrink-0"
                   size={18}
                 />
               </div>
