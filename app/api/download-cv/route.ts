@@ -9,7 +9,7 @@ CONTACTO
 Teléfono: +57 320 225 9640
 Email: angelf.ramosc@unac.edu.co
 GitHub: github.com/Ang3lRamos
-LinkedIn: linkedin.com/in/angel-ramos-528974231
+LinkedIn: linkedin.com/in/angelramos-528974231
 
 PERFIL
 Analista de Datos y Desarrollador de Software con experiencia en automatización de procesos, construcción de soluciones analíticas y desarrollo de aplicaciones. Especializado en Python, SQL, Power BI y Microsoft Azure para el diseño de pipelines ETL, modelado de datos y creación de dashboards de alto impacto. Capaz de integrar análisis, desarrollo y operación mediante prácticas ágiles, optimización de flujos y aplicación de ingeniería de datos. Enfocado en transformar información compleja en soluciones funcionales y decisiones estratégicas basadas en datos.
@@ -28,15 +28,22 @@ CERTIFICACIONES Y COMPETENCIAS
 
 EXPERIENCIA LABORAL
 
-Analista de Operaciones
-Oct 2025 - Presente
+Analista de Automatización y BI - WTW
+Abril 2026 - Presente
+• Tableros en Power BI de endosos, siniestros y cumplimiento de ANS (54+ medidas DAX, ~32 mil casos)
+• RPA en C# para renovaciones de pólizas colectivas de autos con SURA, Allianz, AXA, MAPFRE y HDI
+• Pipelines de datos en Python y migración de macros VBA a Python
+• Documentación técnica y manuales de usuario de cada solución
+
+Analista de Operaciones - Inversiones Manpe
+Oct 2025 - Dic 2025
 • Gestión y análisis de inventarios para mejorar la eficiencia operativa
 • Automatización de controles y procesos utilizando herramientas basadas en datos
 • Creación de reportes y dashboards para monitoreo de KPIs operativos
 • Liderazgo de equipos para optimizar procesos y reducir tiempos de operación
 
-Analista de Datos
-Enero 2025 - Junio 2025
+Analista de Datos (Práctica profesional) - Bancolombia
+Enero 2025 - Julio 2025
 • Desarrollo de dashboards interactivos en Power BI para visualización de KPIs corporativos y toma de decisiones
 • Automatización de procesos de extracción y transformación de datos mediante Python (Pandas) y SQL
 • Optimización de consultas SQL complejas para mejorar el rendimiento de reportes analíticos

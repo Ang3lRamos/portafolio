@@ -2,8 +2,10 @@
 
 import { useEffect, useState } from "react"
 import { Sun, Moon } from "lucide-react"
+import { useT } from "@/lib/i18n"
 
 export default function ThemeToggle() {
+  const t = useT().theme
   const [theme, setTheme] = useState<"light" | "dark">("light")
   const [mounted, setMounted] = useState(false)
 
@@ -42,7 +44,8 @@ export default function ThemeToggle() {
         className={`p-2 rounded-full transition-all duration-300 ${
           theme === "light" ? "bg-accent text-accent-foreground" : "text-muted-foreground hover:text-foreground"
         }`}
-        title="Modo claro"
+        title={t.light}
+        aria-label={t.light}
       >
         <Sun size={16} />
       </button>
@@ -52,7 +55,8 @@ export default function ThemeToggle() {
         className={`p-2 rounded-full transition-all duration-300 ${
           theme === "dark" ? "bg-accent text-accent-foreground" : "text-muted-foreground hover:text-foreground"
         }`}
-        title="Modo oscuro"
+        title={t.dark}
+        aria-label={t.dark}
       >
         <Moon size={16} />
       </button>

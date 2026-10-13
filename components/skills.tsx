@@ -1,40 +1,17 @@
 "use client"
 
+import { useT } from "@/lib/i18n"
+
 export default function Skills() {
-  const skillCategories = [
-    {
-      title: "Datos & Analytics",
-      skills: ["Python", "SQL", "Power BI", "Pandas", "ETL", "Análisis Estadístico"],
-    },
-    {
-      title: "Backend",
-      skills: ["Java", "Spring Boot", "Node.js", "APIs REST", "Arquitectura Modular"],
-    },
-    {
-      title: "Frontend",
-      skills: ["React", "JavaScript", "TypeScript", "TailwindCSS", "Responsive Design"],
-    },
-    {
-      title: "Cloud & DevOps",
-      skills: ["Azure", "Docker", "Git", "GitHub", "Azure DevOps"],
-    },
-    {
-      title: "Metodologías",
-      skills: ["Scrum", "Agile", "Gestión de Versiones"],
-    },
-    {
-      title: "Soft Skills",
-      skills: ["Pensamiento Crítico", "Resolución de Problemas", "Trabajo en Equipo", "Aprendizaje Rápido"],
-    },
-  ]
+  const t = useT().skills
 
   return (
     <section id="skills" className="py-16 sm:py-20 px-4 sm:px-6 bg-background">
       <div className="max-w-5xl mx-auto">
-        <h2 className="text-3xl sm:text-4xl font-bold mb-8 sm:mb-12 text-accent">Habilidades</h2>
+        <h2 className="text-3xl sm:text-4xl font-bold mb-8 sm:mb-12 text-accent">{t.title}</h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-          {skillCategories.map((category) => (
+          {t.categories.map((category) => (
             <div
               key={category.title}
               className="bg-card border border-border rounded-lg p-4 sm:p-6 hover:border-accent transition-all duration-300 cursor-pointer hover:shadow-lg hover:shadow-accent/20"
