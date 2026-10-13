@@ -5,8 +5,10 @@ import type React from "react"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Mail, Github, Linkedin, Phone } from "lucide-react"
+import { useT, LINKEDIN_URL, GITHUB_URL, EMAIL, PHONE } from "@/lib/i18n"
 
 export default function Contact() {
+  const t = useT().contact
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -21,7 +23,7 @@ export default function Contact() {
     setError("")
 
     if (!formData.name || !formData.email || !formData.message) {
-      setError("Por favor completa todos los campos")
+      setError(t.required)
       return
     }
 
@@ -37,7 +39,7 @@ export default function Contact() {
       })
 
       if (!response.ok) {
-        throw new Error("Error al enviar el mensaje")
+        throw new Error(t.sendError)
       }
 
       setIsSubmitted(true)
@@ -47,7 +49,7 @@ export default function Contact() {
         setIsSubmitted(false)
       }, 3000)
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Error desconocido")
+      setError(err instanceof Error ? err.message : t.unknownError)
     } finally {
       setIsLoading(false)
     }
@@ -61,38 +63,39 @@ export default function Contact() {
   return (
     <section id="contact" className="py-16 sm:py-20 px-4 sm:px-6 bg-card">
       <div className="max-w-5xl mx-auto">
-        <h2 className="text-3xl sm:text-4xl font-bold mb-8 sm:mb-12 text-accent text-center">Contacto</h2>
+        <h2 className="text-3xl sm:text-4xl font-bold mb-8 sm:mb-12 text-accent text-center">{t.title}</h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12">
           {/* Contact Information */}
           <div className="space-y-6 sm:space-y-8">
             <div>
-              <h3 className="text-base sm:text-lg font-semibold text-foreground mb-2">Teléfono</h3>
+              <h3 className="text-base sm:text-lg font-semibold text-foreground mb-2">{t.phone}</h3>
               <a
                 href="tel:+573202259640"
                 className="text-accent hover:text-accent/80 transition-colors flex items-center gap-2 cursor-pointer text-sm sm:text-base"
               >
                 <Phone size={20} />
-                +57 320 225 9640
+                {PHONE}
               </a>
             </div>
 
             <div>
               <h3 className="text-base sm:text-lg font-semibold text-foreground mb-2">Email</h3>
               <a
-                href="mailto:angelf.ramosc@unac.edu.co"
+                href={`mailto:${EMAIL}`}
                 className="text-accent hover:text-accent/80 transition-colors flex items-center gap-2 cursor-pointer text-sm sm:text-base break-all"
               >
                 <Mail size={20} className="flex-shrink-0" />
-                angelf.ramosc@unac.edu.co
+                {EMAIL}
               </a>
             </div>
 
             <div>
-              <h3 className="text-base sm:text-lg font-semibold text-foreground mb-4">Redes Sociales</h3>
+              <h3 className="text-base sm:text-lg font-semibold text-foreground mb-4">{t.social}</h3>
               <div className="flex gap-4">
                 <a
-                  href="https://github.com/Ang3lRamos"
+                  href={GITHUB_URL}
+                  aria-label="GitHub"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-accent hover:text-accent/80 transition-colors cursor-pointer hover:scale-110 transform duration-300"
@@ -100,7 +103,8 @@ export default function Contact() {
                   <Github size={28} />
                 </a>
                 <a
-                  href="https://www.linkedin.com/in/angel-ramos-528974231"
+                  href={LINKEDIN_URL}
+                  aria-label="LinkedIn"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-accent hover:text-accent/80 transition-colors cursor-pointer hover:scale-110 transform duration-300"
@@ -115,13 +119,13 @@ export default function Contact() {
           <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
             <div>
               <label htmlFor="name" className="block text-xs sm:text-sm font-medium text-foreground mb-2">
-                Tu nombre
+                {t.name}
               </label>
               <input
                 type="text"
                 id="name"
                 name="name"
-                placeholder="Ej: Juan Pérez"
+                placeholder={t.namePh}
                 value={formData.name}
                 onChange={handleChange}
                 disabled={isLoading}
@@ -132,13 +136,13 @@ export default function Contact() {
 
             <div>
               <label htmlFor="email" className="block text-xs sm:text-sm font-medium text-foreground mb-2">
-                Tu email
+                {t.email}
               </label>
               <input
                 type="email"
                 id="email"
                 name="email"
-                placeholder="tu.email@ejemplo.com"
+                placeholder={t.emailPh}
                 value={formData.email}
                 onChange={handleChange}
                 disabled={isLoading}
@@ -149,12 +153,12 @@ export default function Contact() {
 
             <div>
               <label htmlFor="message" className="block text-xs sm:text-sm font-medium text-foreground mb-2">
-                Tu mensaje
+                {t.message}
               </label>
               <textarea
                 id="message"
                 name="message"
-                placeholder="Cuéntame qué tienes en mente..."
+                placeholder={t.messagePh}
                 value={formData.message}
                 onChange={handleChange}
                 disabled={isLoading}
@@ -175,7 +179,7 @@ export default function Contact() {
               className="w-full bg-accent text-accent-foreground hover:bg-accent/90 cursor-pointer transition-all hover:shadow-lg hover:shadow-accent/30 disabled:opacity-50 text-sm sm:text-base"
               disabled={isSubmitted || isLoading}
             >
-              {isLoading ? "Enviando..." : isSubmitted ? "¡Mensaje enviado!" : "Enviar Mensaje"}
+              {isLoading ? t.sending : isSubmitted ? t.sent : t.send}
             </Button>
           </form>
         </div>

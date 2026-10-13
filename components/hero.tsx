@@ -2,23 +2,24 @@
 
 import { Button } from "@/components/ui/button"
 import { Download, Mail } from "lucide-react"
+import { useT } from "@/lib/i18n"
 
 export default function Hero() {
+  const t = useT().hero
   return (
     <section id="hero" className="min-h-screen flex items-center justify-center pt-20 px-4 sm:px-6">
       <div className="max-w-5xl w-full animate-fade-in">
         <div className="flex flex-col md:grid md:grid-cols-2 gap-8 md:gap-12 items-center">
           <div>
-            <p className="text-base sm:text-lg text-muted-foreground mb-4 font-medium">Hola,</p>
+            <p className="text-base sm:text-lg text-muted-foreground mb-4 font-medium">{t.greeting}</p>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-4 leading-tight">
-              Soy <span className="text-accent">Ángel Ramos</span>
+              {t.iam} <span className="text-accent">Ángel Ramos</span>
             </h1>
             <h2 className="text-lg sm:text-2xl lg:text-3xl text-muted-foreground mb-6 sm:mb-8 font-medium">
-              Analista de Datos & Desarrollador de Software
+              {t.role}
             </h2>
             <p className="text-sm sm:text-base text-muted-foreground mb-6 sm:mb-8 leading-relaxed max-w-md">
-              Profesional especializado en Python, SQL, Power BI y desarrollo web. Transformo información compleja en
-              soluciones funcionales y decisiones estratégicas basadas en datos.
+              {t.intro}
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
@@ -33,7 +34,7 @@ export default function Hero() {
                   className="inline-flex items-center justify-center gap-2"
                 >
                   <Download size={18} />
-                  Descargar CV
+                  {t.cv}
                 </a>
               </Button>
               <Button
@@ -42,7 +43,7 @@ export default function Hero() {
                 onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
               >
                 <Mail size={18} className="mr-2" />
-                Contactarme
+                {t.contact}
               </Button>
             </div>
           </div>
@@ -51,7 +52,7 @@ export default function Hero() {
             <div className="relative w-48 sm:w-64 md:w-80 h-48 sm:h-64 md:h-80">
               <div className="absolute inset-0 bg-accent rounded-full -z-10"></div>
               <img
-                src="/images/retrato_formal.jpg"
+                src="/images/Retrato_Formal.jpg"
                 alt="Ángel Ramos"
                 className="w-full h-full object-cover rounded-full"
               />

@@ -3,6 +3,8 @@
 import { useState } from "react"
 import { Menu, X } from "lucide-react"
 import ThemeToggle from "./theme-toggle"
+import LanguageToggle from "./language-toggle"
+import { useT } from "@/lib/i18n"
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -15,14 +17,7 @@ export default function Header() {
     }
   }
 
-  const navItems = [
-    { label: "Sobre mí", id: "about" },
-    { label: "Habilidades", id: "skills" },
-    { label: "Proyectos", id: "projects" },
-    { label: "Certificaciones", id: "certifications" },
-    { label: "Experiencia", id: "experience" },
-    { label: "Contacto", id: "contact" },
-  ]
+  const navItems = useT().nav
 
   return (
     <header className="fixed top-0 w-full bg-background/80 backdrop-blur-md border-b border-border z-50">
@@ -35,7 +30,7 @@ export default function Header() {
         </button>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex gap-8 items-center">
+        <div className="hidden md:flex gap-6 lg:gap-8 items-center">
           {navItems.map((item) => (
             <button
               key={item.id}
@@ -45,12 +40,13 @@ export default function Header() {
               {item.label}
             </button>
           ))}
-          {/* Theme Toggle */}
+          <LanguageToggle />
           <ThemeToggle />
         </div>
 
         {/* Mobile Menu Button */}
-        <div className="md:hidden flex items-center gap-4">
+        <div className="md:hidden flex items-center gap-3">
+          <LanguageToggle />
           <ThemeToggle />
           <button className="text-foreground" onClick={() => setIsMenuOpen(!isMenuOpen)}>
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}

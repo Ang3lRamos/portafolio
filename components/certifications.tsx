@@ -3,92 +3,11 @@
 import { useState } from "react"
 import { ChevronLeft, ChevronRight, X } from "lucide-react"
 import Image from "next/image"
-
-interface Certificate {
-  id: number
-  title: string
-  platform: string
-  date: string
-  image: string
-  description: string
-}
-
-const certificates: Certificate[] = [
-  {
-    id: 1,
-    title: "Microsoft SQL Server: Análisis de datos con Tableau",
-    platform: "Udemy",
-    date: "21 de agosto de 2024",
-    image: "/images/sqlserver_tableau.jpg",
-    description: "Certificación en análisis de datos SQL Server e integración con Tableau",
-  },
-  {
-    id: 2,
-    title: "Python 3: Análisis y visualización de datos",
-    platform: "Udemy",
-    date: "21 de agosto de 2024",
-    image: "/images/python_datos.jpg",
-    description: "Especialización en análisis de datos y visualización con Python",
-  },
-  {
-    id: 3,
-    title: "Curso Completo de Bases de datos MongoDB y NoSQL",
-    platform: "Udemy",
-    date: "24 de julio de 2023",
-    image: "/images/mongo.jpg",
-    description: "Dominio de bases de datos NoSQL con MongoDB",
-  },
-  {
-    id: 4,
-    title: "Fundamentals of the Databricks Lakehouse Platform",
-    platform: "Databricks Academy",
-    date: "23 de septiembre de 2024",
-    image: "/images/databricks.png",
-    description: "Certificación en Databricks Lakehouse Platform",
-  },
-  {
-    id: 5,
-    title: "Scrum Foundation Professional Certification",
-    platform: "Certiprof",
-    date: "20 de octubre de 2024",
-    image: "/images/scrum.png",
-    description: "Certificación profesional en metodologías Scrum",
-  },
-  {
-    id: 6,
-    title: "Programación web desde cero",
-    platform: "Egg Cooperation",
-    date: "29 de mayo de 2023",
-    image: "/images/egg.png",
-    description: "Formación completa en programación web: HTML, CSS y JavaScript",
-  },
-  {
-    id: 7,
-    title: "SQL: Creación de Bases de Datos (De cero a profesional)",
-    platform: "Udemy",
-    date: "3 de mayo de 2023",
-    image: "/images/mysql.jpg",
-    description: "Certificación profesional en creación y gestión de bases de datos SQL",
-  },
-  {
-    id: 8,
-    title: "Six Sigma White Belt",
-    platform: "Council for Six Sigma Certification",
-    date: "Septiembre 2025",
-    image: "/images/six-sigma.png",
-    description: "Certificación Six Sigma White Belt para optimización de procesos",
-  },
-  {
-    id: 9,
-    title: "Power Bi + Ia",
-    platform: "Daxus Latam",
-    date: "Enero 2026",
-    image: "/images/PowerBi+Ia.png",
-    description: "Certificación Power BI + IA (Daxus Latam)",
-  },
-]
+import { useT } from "@/lib/i18n"
 
 export default function Certifications() {
+  const t = useT().certifications
+  const certificates = t.items
   const [isOpen, setIsOpen] = useState(false)
   const [currentIndex, setCurrentIndex] = useState(0)
 
@@ -105,16 +24,16 @@ export default function Certifications() {
   return (
     <section id="certifications" className="py-16 sm:py-20 px-4 sm:px-6 max-w-6xl mx-auto">
       <div className="text-center mb-12">
-        <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">Certificaciones</h2>
+        <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">{t.title}</h2>
         <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto">
-          Certificaciones profesionales y cursos completados de plataformas líderes en educación
+          {t.subtitle}
         </p>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         {certificates.map((cert, idx) => (
           <div
-            key={cert.id}
+            key={cert.title}
             onClick={() => {
               setCurrentIndex(idx)
               setIsOpen(true)
@@ -144,7 +63,7 @@ export default function Certifications() {
             <div className="flex items-center justify-between p-4 sm:p-6 border-b border-border">
               <div>
                 <p className="text-xs sm:text-sm text-muted-foreground">
-                  {currentIndex + 1} de {certificates.length}
+                  {currentIndex + 1} {t.of} {certificates.length}
                 </p>
                 <h3 className="text-lg sm:text-xl font-bold text-foreground mt-1 line-clamp-2">{current.title}</h3>
               </div>
@@ -167,15 +86,15 @@ export default function Certifications() {
 
               <div className="space-y-4">
                 <div>
-                  <p className="text-xs text-muted-foreground uppercase tracking-wide">Plataforma</p>
+                  <p className="text-xs text-muted-foreground uppercase tracking-wide">{t.platform}</p>
                   <p className="text-sm sm:text-base font-semibold text-foreground">{current.platform}</p>
                 </div>
                 <div>
-                  <p className="text-xs text-muted-foreground uppercase tracking-wide">Fecha de Certificación</p>
+                  <p className="text-xs text-muted-foreground uppercase tracking-wide">{t.date}</p>
                   <p className="text-sm sm:text-base font-semibold text-foreground">{current.date}</p>
                 </div>
                 <div>
-                  <p className="text-xs text-muted-foreground uppercase tracking-wide">Descripción</p>
+                  <p className="text-xs text-muted-foreground uppercase tracking-wide">{t.description}</p>
                   <p className="text-sm text-foreground">{current.description}</p>
                 </div>
               </div>
@@ -188,7 +107,7 @@ export default function Certifications() {
                 className="flex items-center gap-2 px-4 py-2 rounded-lg bg-primary hover:bg-primary/90 text-primary-foreground transition-colors text-sm font-medium"
               >
                 <ChevronLeft className="w-4 h-4" />
-                <span className="hidden sm:inline">Anterior</span>
+                <span className="hidden sm:inline">{t.prev}</span>
               </button>
 
               {/* Indicador visual */}
@@ -208,7 +127,7 @@ export default function Certifications() {
                 onClick={handleNext}
                 className="flex items-center gap-2 px-4 py-2 rounded-lg bg-primary hover:bg-primary/90 text-primary-foreground transition-colors text-sm font-medium"
               >
-                <span className="hidden sm:inline">Siguiente</span>
+                <span className="hidden sm:inline">{t.next}</span>
                 <ChevronRight className="w-4 h-4" />
               </button>
             </div>
