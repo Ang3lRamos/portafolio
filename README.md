@@ -1,36 +1,65 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portafolio · Ángel Ramos
 
-## Getting Started
+Mi sitio personal: experiencia, proyectos, habilidades y certificaciones como Analista de Automatización y BI y desarrollador full-stack. Es bilingüe (español e inglés) y tiene formulario de contacto y CV descargable.
 
-First, run the development server:
+**Sitio:** https://portfolioangeldev.netlify.app
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+*Personal portfolio website, bilingual (ES/EN), with a working contact form and downloadable CV.*
+
+## Funcionalidades
+
+- **Bilingüe ES/EN:** todo el contenido sale de un diccionario tipado en [`lib/i18n.tsx`](lib/i18n.tsx) y se cambia con un botón, sin recargar la página.
+- **Tema claro y oscuro.**
+- **Secciones:**
+  - inicio;
+  - sobre mí;
+  - experiencia, con WTW, Bancolombia, Inversiones Manpe y trabajo independiente;
+  - proyectos con enlaces;
+  - habilidades;
+  - certificaciones;
+  - contacto.
+- **Formulario de contacto:** una ruta de API de Next.js valida los datos y envía el mensaje a mi correo con [Resend](https://resend.com).
+- **CV descargable:** una ruta de API lo entrega, y un script con pdfkit genera la versión en PDF.
+
+## Stack
+
+- **Next.js 16** (App Router) con React 19 y TypeScript
+- **Tailwind CSS v4** y componentes de shadcn/ui
+- **Resend** para el correo y **pdfkit** para el PDF del CV
+- **lucide-react** para los íconos
+
+## Estructura
+
+```
+app/
+  page.tsx              una sola página con todas las secciones
+  api/contact/          envío del formulario de contacto (Resend)
+  api/download-cv/      descarga del CV
+components/             una sección por archivo, más los selectores de idioma y de tema
+lib/i18n.tsx            textos en español e inglés, y datos de experiencia y proyectos
+scripts/generate-cv.js  genera public/cv.pdf
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Correr en local
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Instala las dependencias:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+   ```bash
+   npm install
+   ```
 
-## Learn More
+2. Crea un archivo `.env.local` con la llave de Resend, necesaria para el formulario:
 
-To learn more about Next.js, take a look at the following resources:
+   ```env
+   RESEND_API_KEY=tu-llave
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3. Arranca el servidor:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+   ```bash
+   npm run dev
+   ```
 
-## Deploy on Vercel
+   Abre http://localhost:3000.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Para regenerar el PDF del CV, usa `node scripts/generate-cv.js`.
