@@ -161,6 +161,7 @@ export const PROJECTS: Project[] = [
     stack: ["Python", "MetaTrader 5", "SQLite", "pytest"],
     repo: "https://github.com/Ang3lRamos/a1Tradingbot-",
     demo: "https://web-gzse.vercel.app",
+    image: "/projects/mt5bot.webp",
   },
   {
     slug: "powerbi-bigdata",
@@ -186,6 +187,7 @@ export const PROJECTS: Project[] = [
     stack: ["Python", "Pandas", "Matplotlib", "pytest", "SQL", "Jupyter"],
     repo: "https://github.com/Ang3lRamos/data-cleaning-project",
     demo: "https://web-hpco.vercel.app",
+    image: "/projects/data-cleaning.webp",
   },
   {
     slug: "predictive-model",
@@ -199,6 +201,7 @@ export const PROJECTS: Project[] = [
     stack: ["Python", "scikit-learn", "Pandas"],
     repo: "https://github.com/Ang3lRamos/modelo-predictivo",
     demo: "https://web-zpvk.vercel.app",
+    image: "/projects/predictive-model.webp",
   },
   {
     slug: "pokedex",
