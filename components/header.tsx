@@ -48,7 +48,7 @@ export default function Header() {
         <div className="md:hidden flex items-center gap-3">
           <LanguageToggle />
           <ThemeToggle />
-          <button className="text-foreground" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+          <button className="text-foreground" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="Menu" aria-expanded={isMenuOpen} aria-controls="mobile-menu">
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
@@ -56,7 +56,7 @@ export default function Header() {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden bg-secondary border-t border-border">
+        <div id="mobile-menu" className="md:hidden bg-secondary border-t border-border">
           <div className="max-w-6xl mx-auto px-4 py-4 flex flex-col gap-4">
             {navItems.map((item) => (
               <button

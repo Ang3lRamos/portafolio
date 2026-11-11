@@ -1,6 +1,8 @@
 "use client"
 
-import { createContext, useContext, useEffect, useState, type ReactNode } from "react"
+import { createContext, useContext, useEffect, useSyncExternalStore, type ReactNode } from "react"
+
+import type { Bi } from "./projects"
 
 export type Lang = "es" | "en"
 
@@ -11,23 +13,28 @@ type LanguageContextValue = {
 
 const LanguageContext = createContext<LanguageContextValue | null>(null)
 
-export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [lang, setLangState] = useState<Lang>("es")
+// El idioma vive fuera de React: el guardado, o el del navegador. En el servidor siempre es español.
+const listeners = new Set<() => void>()
+let current: Lang | null = null
 
-  useEffect(() => {
-    let initial: Lang = "es"
-    try {
-      const saved = localStorage.getItem("lang")
-      if (saved === "es" || saved === "en") {
-        initial = saved
-      } else if (!navigator.language.toLowerCase().startsWith("es")) {
-        initial = "en"
-      }
-    } catch {
-      // localStorage may be unavailable; keep default
-    }
-    setLangState(initial)
-  }, [])
+function readLang(): Lang {
+  if (current) return current
+  try {
+    const saved = localStorage.getItem("lang")
+    if (saved === "es" || saved === "en") return (current = saved)
+  } catch {
+    // sin almacenamiento se usa el idioma del navegador
+  }
+  return (current = navigator.language.toLowerCase().startsWith("es") ? "es" : "en")
+}
+
+function subscribeLang(onChange: () => void) {
+  listeners.add(onChange)
+  return () => listeners.delete(onChange)
+}
+
+export function LanguageProvider({ children }: { children: ReactNode }) {
+  const lang = useSyncExternalStore(subscribeLang, readLang, () => "es" as Lang)
 
   useEffect(() => {
     document.documentElement.lang = lang
@@ -38,12 +45,13 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   }, [lang])
 
   const setLang = (next: Lang) => {
-    setLangState(next)
+    current = next
     try {
       localStorage.setItem("lang", next)
     } catch {
       // ignore
     }
+    listeners.forEach((l) => l())
   }
 
   return <LanguageContext.Provider value={{ lang, setLang }}>{children}</LanguageContext.Provider>
@@ -61,7 +69,6 @@ export function useT() {
   return content[lang]
 }
 
-type Bi = { es: string; en: string }
 
 const nav = {
   es: [
@@ -81,66 +88,6 @@ const nav = {
     { label: "Contact", id: "contact" },
   ],
 }
-
-type Project = { title: Bi; description: Bi; demo?: string; tags: string[]; link: string }
-
-const projects: Project[] = [
-  {
-    title: { es: "Chatbot Ingenia - IA Conversacional", en: "Ingenia Chatbot - Conversational AI" },
-    description: {
-      es: "Chatbot inteligente con flujos en n8n, RAG (Retrieval-Augmented Generation) y LLM. Integración con Supabase para datos y Redis para caché.",
-      en: "Intelligent chatbot built with n8n workflows, RAG (Retrieval-Augmented Generation) and LLMs. Uses Supabase for data and Redis for caching.",
-    },
-    demo: "angel@ingenia.com / ingenia123",
-    tags: ["Next.js", "n8n", "Supabase", "Redis", "LLM", "RAG"],
-    link: "https://ingenia.singularity.cyou/chat-ingenia",
-  },
-  {
-    title: { es: "Aqua Bear - Sistema de Reservas", en: "Aqua Bear - Booking System" },
-    description: {
-      es: "Aplicación full-stack de reservas con autenticación de usuarios y panel de administración para gestionar clases. Control de acceso basado en roles (RBAC) que separa las funciones de cliente y administrador.",
-      en: "Full-stack booking application with user authentication and an admin dashboard to manage classes. Role-based access control (RBAC) separates client and administrator features.",
-    },
-    tags: ["Next.js", "React", "TypeScript", "Supabase", "PostgreSQL", "Tailwind CSS"],
-    link: "https://aqua-bear.vercel.app",
-  },
-  {
-    title: { es: "Dashboard de Power BI - Análisis de Datos", en: "Power BI Dashboard - Data Analysis" },
-    description: {
-      es: "Dashboard interactivo desarrollado con Databricks y Spark para el procesamiento de grandes volúmenes de información y visualizaciones avanzadas.",
-      en: "Interactive dashboard built with Databricks and Spark to process large data volumes and deliver advanced visualizations.",
-    },
-    tags: ["Databricks", "Spark", "Python", "Power BI"],
-    link: "https://app.powerbi.com/view?r=eyJrIjoiOGJmZWVkZTctNzNmMC00OTZjLWFlNGItZmUwNzY1ODRhNmM0IiwidCI6IjRkZDEzM2ZkLWNhMmEtNDA5OC1hZTkxLTBlYWEwYzU4MjNiOCIsImMiOjR9",
-  },
-  {
-    title: { es: "Proyecto de Limpieza de Datos", en: "Data Cleaning Project" },
-    description: {
-      es: "Extracción, limpieza y procesamiento de datos con Pandas. Incluye análisis exploratorio, visualizaciones con Matplotlib y pruebas unitarias con Pytest.",
-      en: "Data extraction, cleaning and processing with Pandas. Includes exploratory analysis, Matplotlib visualizations and unit tests with Pytest.",
-    },
-    tags: ["Python", "Pandas", "Matplotlib", "Pytest", "SQL", "Jupyter"],
-    link: "https://github.com/Ang3lRamos/data-cleaning-project.git",
-  },
-  {
-    title: { es: "Modelo Predictivo con scikit-learn", en: "Predictive Model with scikit-learn" },
-    description: {
-      es: "Modelo de machine learning con scikit-learn: preparación de datos, entrenamiento y evaluación de modelos.",
-      en: "Machine learning model with scikit-learn: data preparation, model training and evaluation.",
-    },
-    tags: ["Python", "Machine Learning", "scikit-learn"],
-    link: "https://colab.research.google.com/drive/1icWFIpgn5dAl5sfqFTPXwcHnBKyKS8j0?usp=sharing",
-  },
-  {
-    title: { es: "Pokédex", en: "Pokédex" },
-    description: {
-      es: "Aplicación interactiva con búsqueda, filtrado por tipo y detalle de cada Pokémon, consumiendo una API REST en tiempo real.",
-      en: "Interactive app with search, type filtering and detail views, consuming a REST API in real time.",
-    },
-    tags: ["React", "TypeScript", "API REST"],
-    link: "https://pokedex-angel.netlify.app/",
-  },
-]
 
 type Job = { title: Bi; company: string; period: Bi; summary?: Bi; bullets: Bi[] }
 
@@ -347,18 +294,18 @@ const certificates: Cert[] = [
 const skills = {
   es: [
     { title: "Datos & BI", skills: ["Python", "SQL", "Power BI", "DAX", "Pandas", "ETL", "Databricks"] },
-    { title: "Automatización & IA", skills: ["RPA", "C#", "n8n", "LLM", "RAG", "VBA → Python"] },
+    { title: "Automatización & IA", skills: ["Claude", "Agentes de IA", "RPA", "C#", "n8n", "LLM", "RAG", "VBA → Python"] },
     { title: "Backend", skills: ["Java", "Spring Boot", "Node.js", "APIs REST", "PostgreSQL", "Supabase"] },
     { title: "Frontend", skills: ["React", "Next.js", "TypeScript", "JavaScript", "Tailwind CSS"] },
-    { title: "Cloud & DevOps", skills: ["Azure", "Docker", "Git", "GitHub", "Azure DevOps"] },
+    { title: "Cloud & DevOps", skills: ["AWS", "Terraform", "Docker", "GitHub Actions", "CI/CD", "Azure", "Git"] },
     { title: "Metodologías", skills: ["Scrum", "Agile", "Six Sigma", "Documentación técnica"] },
   ],
   en: [
     { title: "Data & BI", skills: ["Python", "SQL", "Power BI", "DAX", "Pandas", "ETL", "Databricks"] },
-    { title: "Automation & AI", skills: ["RPA", "C#", "n8n", "LLM", "RAG", "VBA → Python"] },
+    { title: "Automation & AI", skills: ["Claude", "AI agents", "RPA", "C#", "n8n", "LLM", "RAG", "VBA → Python"] },
     { title: "Backend", skills: ["Java", "Spring Boot", "Node.js", "REST APIs", "PostgreSQL", "Supabase"] },
     { title: "Frontend", skills: ["React", "Next.js", "TypeScript", "JavaScript", "Tailwind CSS"] },
-    { title: "Cloud & DevOps", skills: ["Azure", "Docker", "Git", "GitHub", "Azure DevOps"] },
+    { title: "Cloud & DevOps", skills: ["AWS", "Terraform", "Docker", "GitHub Actions", "CI/CD", "Azure", "Git"] },
     { title: "Methodologies", skills: ["Scrum", "Agile", "Six Sigma", "Technical documentation"] },
   ],
 }
@@ -406,8 +353,8 @@ function build(lang: Lang) {
         ? ", desde la base de datos y la API hasta la interfaz, aplicando Scrum, arquitectura limpia y pruebas automatizadas."
         : ", from the database and API to the user interface, applying Scrum, clean architecture and automated testing.",
       p3: es
-        ? "Me apasiona combinar datos, automatización e inteligencia artificial (n8n, LLM, RAG) para crear soluciones con impacto real en el negocio."
-        : "I'm passionate about combining data, automation and artificial intelligence (n8n, LLMs, RAG) to build solutions with real business impact.",
+        ? "Me apasiona combinar datos, automatización e inteligencia artificial para crear soluciones con impacto real: agentes con Claude, RAG y flujos en n8n, desplegados con DevOps en AWS y Terraform."
+        : "I'm passionate about combining data, automation and artificial intelligence to build solutions with real impact: Claude-powered agents, RAG and n8n workflows, shipped with DevOps on AWS and Terraform.",
       education: es ? "Educación" : "Education",
       degree: es ? "Ingeniería de Sistemas" : "B.S. in Systems Engineering",
       contact: es ? "Contacto" : "Contact",
@@ -416,8 +363,20 @@ function build(lang: Lang) {
     skills: { title: es ? "Habilidades" : "Skills", categories: skills[lang] },
     projects: {
       title: es ? "Proyectos" : "Projects",
+      subtitle: es ? "Toca una tarjeta para ver el detalle, el stack y los enlaces." : "Tap a card to see details, stack and links.",
+      search: es ? "Buscar proyecto o tecnología…" : "Search project or technology…",
+      filter: es ? "Filtrar por tipo" : "Filter by type",
+      all: es ? "Todos" : "All",
+      showing: (n: number) => (es ? `Mostrando ${n} ${n === 1 ? "proyecto" : "proyectos"}` : `Showing ${n} ${n === 1 ? "project" : "projects"}`),
+      total: es ? "Total" : "Total",
+      empty: es ? "Ningún proyecto coincide con la búsqueda." : "No project matches your search.",
+      open: es ? "Ver detalle" : "View details",
+      close: es ? "Cerrar" : "Close",
+      highlights: es ? "Lo destacado" : "Highlights",
+      stack: "Stack",
       demo: es ? "Credenciales de prueba" : "Demo credentials",
-      items: pick(projects, lang) as { title: string; description: string; demo?: string; tags: string[]; link: string }[],
+      live: es ? "Ver demo" : "Live demo",
+      code: es ? "Ver código" : "View code",
     },
     experience: {
       title: es ? "Experiencia" : "Experience",
@@ -434,6 +393,7 @@ function build(lang: Lang) {
       description: es ? "Descripción" : "Description",
       prev: es ? "Anterior" : "Previous",
       next: es ? "Siguiente" : "Next",
+      close: es ? "Cerrar" : "Close",
       items: pick(certificates, lang) as { title: string; platform: string; date: string; image: string; description: string }[],
     },
     contact: {
@@ -447,7 +407,8 @@ function build(lang: Lang) {
       message: es ? "Tu mensaje" : "Your message",
       messagePh: es ? "Cuéntame qué tienes en mente..." : "Tell me what you have in mind...",
       required: es ? "Por favor completa todos los campos" : "Please fill in all fields",
-      sendError: es ? "Error al enviar el mensaje" : "The message could not be sent",
+      sendError: es ? "No se pudo enviar el mensaje. Escríbeme directo al correo." : "The message could not be sent. Please email me directly.",
+      invalid: es ? "Revisa los datos: el correo debe ser válido y el mensaje no tan largo." : "Please check your details: a valid email and a shorter message.",
       unknownError: es ? "Error desconocido" : "Unknown error",
       sending: es ? "Enviando..." : "Sending...",
       sent: es ? "¡Mensaje enviado!" : "Message sent!",

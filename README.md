@@ -14,18 +14,19 @@ Mi sitio personal: experiencia, proyectos, habilidades y certificaciones como An
   - inicio;
   - sobre mí;
   - experiencia, con WTW, Bancolombia, Inversiones Manpe y trabajo independiente;
-  - proyectos con enlaces;
+  - proyectos en tarjetas de colores por tipo (IA, Web, Datos, Trading, ML), con buscador, filtros y una ficha de detalle;
   - habilidades;
   - certificaciones;
   - contacto.
-- **Formulario de contacto:** una ruta de API de Next.js valida los datos y envía el mensaje a mi correo con [Resend](https://resend.com).
-- **CV descargable:** una ruta de API lo entrega, y un script con pdfkit genera la versión en PDF.
+- **Formulario de contacto:** una ruta de API de Next.js valida los datos con zod, escapa el contenido, descarta bots con un campo trampa y envía el mensaje a mi correo con [Resend](https://resend.com).
+- **CV:** el botón abre el CV publicado; `npm run cv` genera una versión en PDF con pdfkit.
 
 ## Stack
 
 - **Next.js 16** (App Router) con React 19 y TypeScript
 - **Tailwind CSS v4** y componentes de shadcn/ui
-- **Resend** para el correo y **pdfkit** para el PDF del CV
+- **Radix Dialog** para los modales accesibles (Esc, foco atrapado)
+- **zod** y **Resend** para el formulario, **pdfkit** para el PDF del CV
 - **lucide-react** para los íconos
 
 ## Estructura
@@ -34,9 +35,11 @@ Mi sitio personal: experiencia, proyectos, habilidades y certificaciones como An
 app/
   page.tsx              una sola página con todas las secciones
   api/contact/          envío del formulario de contacto (Resend)
-  api/download-cv/      descarga del CV
 components/             una sección por archivo, más los selectores de idioma y de tema
-lib/i18n.tsx            textos en español e inglés, y datos de experiencia y proyectos
+components/ui/          botón y modal reutilizables
+lib/projects.ts         proyectos: agregar uno es agregar un objeto a la lista
+lib/i18n.tsx            textos en español e inglés, experiencia y certificaciones
+public/projects/        capturas de los proyectos (800×500, WebP)
 scripts/generate-cv.js  genera public/cv.pdf
 ```
 
@@ -62,4 +65,4 @@ scripts/generate-cv.js  genera public/cv.pdf
 
    Abre http://localhost:3000.
 
-Para regenerar el PDF del CV, usa `node scripts/generate-cv.js`.
+Para regenerar el PDF del CV, usa `npm run cv`. Antes de subir cambios: `npm run lint` y `npm run build`.

@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Download, Mail } from "lucide-react"
 import { useT } from "@/lib/i18n"
@@ -7,7 +8,7 @@ import { useT } from "@/lib/i18n"
 export default function Hero() {
   const t = useT().hero
   return (
-    <section id="hero" className="min-h-screen flex items-center justify-center pt-20 px-4 sm:px-6">
+    <section id="hero" className="min-h-[100svh] flex items-center justify-center pt-24 pb-12 px-4 sm:px-6">
       <div className="max-w-5xl w-full animate-fade-in">
         <div className="flex flex-col md:grid md:grid-cols-2 gap-8 md:gap-12 items-center">
           <div>
@@ -51,10 +52,13 @@ export default function Hero() {
           <div className="flex justify-center md:justify-end">
             <div className="relative w-48 sm:w-64 md:w-80 h-48 sm:h-64 md:h-80">
               <div className="absolute inset-0 bg-accent rounded-full -z-10"></div>
-              <img
+              <Image
                 src="/images/Retrato_Formal.jpg"
                 alt="Ángel Ramos"
-                className="w-full h-full object-cover rounded-full"
+                fill
+                priority
+                sizes="(min-width: 768px) 320px, (min-width: 640px) 256px, 192px"
+                className="object-cover rounded-full"
               />
             </div>
           </div>

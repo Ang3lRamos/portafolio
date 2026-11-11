@@ -1,6 +1,6 @@
 import PDFDocument from "pdfkit"
-import fs from "fs"
-import path from "path"
+import fs from "node:fs"
+import path from "node:path"
 
 const doc = new PDFDocument({ margin: 50 })
 const filePath = path.join(process.cwd(), "public", "cv.pdf")

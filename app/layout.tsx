@@ -3,61 +3,37 @@ import type { Metadata } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
 import "./globals.css"
 
-const _geist = Geist({ subsets: ["latin"] })
-const _geistMono = Geist_Mono({ subsets: ["latin"] })
+const geist = Geist({ subsets: ["latin"], variable: "--font-geist" })
+const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono" })
+
+const SITE = "https://portfolioangeldev.netlify.app"
+const DESCRIPTION =
+  "Portfolio of Ángel Ramos - Automation & BI Analyst and Full-Stack Developer. Power BI, Python, SQL, RPA, AI agents with Claude, DevOps on AWS, React and Next.js."
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE),
   title: "Ángel Ramos | Automation & BI Analyst · Full-Stack Developer",
-  description:
-    "Portfolio of Ángel Ramos - Automation & BI Analyst and Full-Stack Developer. Power BI, Python, SQL, RPA, React, Next.js and Node.js.",
-  generator: "v0.app",
-  icons: {
-    icon: [
-      {
-        url: "/icon-light-32x32.png",
-        media: "(prefers-color-scheme: light)",
-      },
-      {
-        url: "/icon-dark-32x32.png",
-        media: "(prefers-color-scheme: dark)",
-      },
-      {
-        url: "/icon.svg",
-        type: "image/svg+xml",
-      },
-    ],
-    apple: "/apple-icon.png",
+  description: DESCRIPTION,
+  openGraph: {
+    title: "Ángel Ramos · Portfolio",
+    description: DESCRIPTION,
+    url: SITE,
+    images: ["/projects/a2tradingbot.webp"],
+    type: "website",
   },
 }
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+// Aplica el tema antes de pintar para evitar el destello: el guardado, o el del sistema.
+const THEME_SCRIPT = `(function(){try{var t=localStorage.getItem('theme');var d=t?t==='dark':matchMedia('(prefers-color-scheme: dark)').matches;document.documentElement.classList.toggle('dark',d)}catch(e){}})()`
+
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="es">
-      <body className={`font-sans antialiased`}>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                const theme = localStorage.getItem('theme') || 'auto';
-                const html = document.documentElement;
-                
-                if (theme === 'auto') {
-                  const hour = new Date().getHours();
-                  const isDark = hour < 6 || hour >= 18;
-                  html.classList.toggle('dark', isDark);
-                } else {
-                  html.classList.toggle('dark', theme === 'dark');
-                }
-              })()
-            `,
-          }}
-        />
-        {children}
-      </body>
+    // El script cambia la clase de <html> antes de hidratar; la advertencia de React es esperada.
+    <html lang="es" className={`${geist.variable} ${geistMono.variable}`} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
+      </head>
+      <body className="font-sans antialiased">{children}</body>
     </html>
   )
 }

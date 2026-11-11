@@ -13,6 +13,7 @@ export default function Contact() {
     name: "",
     email: "",
     message: "",
+    website: "",
   })
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
@@ -39,11 +40,11 @@ export default function Contact() {
       })
 
       if (!response.ok) {
-        throw new Error(t.sendError)
+        throw new Error(response.status === 400 ? t.invalid : t.sendError)
       }
 
       setIsSubmitted(true)
-      setFormData({ name: "", email: "", message: "" })
+      setFormData({ name: "", email: "", message: "", website: "" })
 
       setTimeout(() => {
         setIsSubmitted(false)
@@ -117,6 +118,9 @@ export default function Contact() {
 
           {/* Contact Form */}
           <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
+            {/* Campo trampa: oculto para personas; los bots lo llenan y el servidor los descarta. */}
+            <input type="text" name="website" value={formData.website} onChange={handleChange} tabIndex={-1}
+              autoComplete="off" aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 opacity-0" />
             <div>
               <label htmlFor="name" className="block text-xs sm:text-sm font-medium text-foreground mb-2">
                 {t.name}
@@ -130,7 +134,7 @@ export default function Contact() {
                 onChange={handleChange}
                 disabled={isLoading}
                 required
-                className="w-full bg-background border border-border rounded-lg px-3 sm:px-4 py-2 text-sm sm:text-base text-foreground placeholder-muted-foreground focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all cursor-pointer disabled:opacity-50"
+                className="w-full bg-background border border-border rounded-lg px-3 sm:px-4 py-2 text-sm sm:text-base text-foreground placeholder-muted-foreground focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all disabled:opacity-50"
               />
             </div>
 
@@ -147,7 +151,7 @@ export default function Contact() {
                 onChange={handleChange}
                 disabled={isLoading}
                 required
-                className="w-full bg-background border border-border rounded-lg px-3 sm:px-4 py-2 text-sm sm:text-base text-foreground placeholder-muted-foreground focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all cursor-pointer disabled:opacity-50"
+                className="w-full bg-background border border-border rounded-lg px-3 sm:px-4 py-2 text-sm sm:text-base text-foreground placeholder-muted-foreground focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all disabled:opacity-50"
               />
             </div>
 
@@ -164,7 +168,7 @@ export default function Contact() {
                 disabled={isLoading}
                 required
                 rows={4}
-                className="w-full bg-background border border-border rounded-lg px-3 sm:px-4 py-2 text-sm sm:text-base text-foreground placeholder-muted-foreground focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all resize-none cursor-pointer disabled:opacity-50"
+                className="w-full bg-background border border-border rounded-lg px-3 sm:px-4 py-2 text-sm sm:text-base text-foreground placeholder-muted-foreground focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all resize-none disabled:opacity-50"
               />
             </div>
 
