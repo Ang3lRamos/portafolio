@@ -6,11 +6,11 @@ export type Bi = { es: string; en: string }
 export type ProjectType = "ai" | "web" | "data" | "trading" | "ml"
 
 export const PROJECT_TYPES: Record<ProjectType, { label: Bi; color: string }> = {
-  ai: { label: { es: "IA", en: "AI" }, color: "#7c3aed" },
-  web: { label: { es: "Web", en: "Web" }, color: "#2563eb" },
-  data: { label: { es: "Datos", en: "Data" }, color: "#d97706" },
-  trading: { label: { es: "Trading", en: "Trading" }, color: "#059669" },
-  ml: { label: { es: "ML", en: "ML" }, color: "#db2777" },
+  ai: { label: { es: "IA", en: "AI" }, color: "#8b5cf6" },
+  web: { label: { es: "Web", en: "Web" }, color: "#3b82f6" },
+  data: { label: { es: "Datos", en: "Data" }, color: "#f59e0b" },
+  trading: { label: { es: "Trading", en: "Trading" }, color: "#10b981" },
+  ml: { label: { es: "ML", en: "ML" }, color: "#ec4899" },
 }
 
 export type Project = {
