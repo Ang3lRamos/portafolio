@@ -57,6 +57,7 @@ export default function Hero() {
                 alt="Ángel Ramos"
                 fill
                 priority
+                quality={90}
                 sizes="(min-width: 768px) 320px, (min-width: 640px) 256px, 192px"
                 className="object-cover rounded-full"
               />

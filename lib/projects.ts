@@ -21,7 +21,7 @@ export type Project = {
   summary: Bi
   highlights: Bi[]
   stack: string[]
-  /** Captura en /public/projects (800×500). Sin imagen se dibuja un ícono del tipo. */
+  /** Captura en /public/projects (1600×1000, tomada al doble de resolución). Sin imagen se dibuja un ícono del tipo. */
   image?: string
   demo?: string
   repo?: string

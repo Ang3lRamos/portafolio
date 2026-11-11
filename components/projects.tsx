@@ -124,9 +124,10 @@ function Artwork({ project }: { project: Project }) {
       <Image
         src={project.image}
         alt=""
-        width={800}
-        height={500}
-        sizes="(min-width: 1024px) 320px, (min-width: 640px) 45vw, 90vw"
+        width={1600}
+        height={1000}
+        quality={90}
+        sizes="(min-width: 1024px) 340px, (min-width: 640px) 48vw, 92vw"
         className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
       />
     )
