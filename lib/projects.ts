@@ -160,6 +160,7 @@ export const PROJECTS: Project[] = [
     ],
     stack: ["Python", "MetaTrader 5", "SQLite", "pytest"],
     repo: "https://github.com/Ang3lRamos/a1Tradingbot-",
+    demo: "https://web-gzse.vercel.app",
   },
   {
     slug: "powerbi-bigdata",
@@ -184,6 +185,7 @@ export const PROJECTS: Project[] = [
     highlights: [{ es: "Calidad de datos asegurada con pytest", en: "Data quality enforced with pytest" }],
     stack: ["Python", "Pandas", "Matplotlib", "pytest", "SQL", "Jupyter"],
     repo: "https://github.com/Ang3lRamos/data-cleaning-project",
+    demo: "https://web-hpco.vercel.app",
   },
   {
     slug: "predictive-model",
@@ -195,7 +197,8 @@ export const PROJECTS: Project[] = [
     },
     highlights: [{ es: "Notebook reproducible en Google Colab", en: "Reproducible notebook on Google Colab" }],
     stack: ["Python", "scikit-learn", "Pandas"],
-    demo: "https://colab.research.google.com/drive/1icWFIpgn5dAl5sfqFTPXwcHnBKyKS8j0?usp=sharing",
+    repo: "https://github.com/Ang3lRamos/modelo-predictivo",
+    demo: "https://web-zpvk.vercel.app",
   },
   {
     slug: "pokedex",
