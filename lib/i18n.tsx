@@ -425,7 +425,7 @@ function build(lang: Lang) {
 
 const content = { es: build("es"), en: build("en") }
 
-export const LINKEDIN_URL = "https://www.linkedin.com/in/angelramos-528974231"
+export const LINKEDIN_URL = "https://www.linkedin.com/in/angel-ramos-528974231"
 export const GITHUB_URL = "https://github.com/Ang3lRamos"
 export const EMAIL = "angelf.ramosc@unac.edu.co"
 export const PHONE = "+57 320 225 9640"
