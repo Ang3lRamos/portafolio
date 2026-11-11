@@ -80,6 +80,8 @@ export const PROJECTS: Project[] = [
     ],
     stack: ["Next.js", "Anthropic API", "Supabase", "TypeScript"],
     repo: "https://github.com/Ang3lRamos/perfumer-a",
+    demo: "https://perfumer-a-6fd7.vercel.app",
+    image: "/projects/agente-ventas.webp",
   },
   {
     slug: "mega-optica",
